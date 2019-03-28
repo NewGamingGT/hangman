@@ -1,15 +1,6 @@
 import random
-import os
-import sys
-import time
 import drawhangman
-
-def restart():
-    time.sleep(1)
-    os.execl(sys.executable, os.path.abspath(__file__), *sys.argv) 
-
-def clearScreen():
-    os.system("cls")
+from gameflow import clearScreen, restart
 
 def win():
     clearScreen()
@@ -42,14 +33,14 @@ def checkGuess(totalGuess):
     print("".join(array))
     checkLose(totalGuess)
 
-    running(totalGuess) 
+    running(totalGuess)
 
 def running(totalGuess):
     checkWin(totalGuess)
 
     answer = input("Guess your letter: ")
     if answer.isdigit() or len(answer) > 1 or answer == "":
-        print("Please enter one character")
+        print("Please enter one character and do not put numbers")
         running(totalGuess)
     else:
         for i in randomWord:
@@ -59,7 +50,7 @@ def running(totalGuess):
                         array[x] = i
                 print(" ".join(array))
                 running(totalGuess)
-            
+
         totalGuess -= 1
         checkGuess(totalGuess)
 
@@ -68,13 +59,14 @@ with open("sowpods.txt", 'r') as f:
 
 randomWord = random.choice(lines).strip()
 
-array = ["","","","","","","","","","","","","","","","","","","","","","","",""]
+array = []
 totalGuess = 6
 
-for i in range(0, len(randomWord)):
-    array[i] = "_ "
+for _ in range(len(randomWord)):
+    array.append("_ ")
 
-os.system("cls")
+clearScreen()
 print(">>> Welcome to Hangman!")
 print("".join(array))
+
 running(totalGuess)
