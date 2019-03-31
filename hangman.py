@@ -71,5 +71,5 @@ totalGuess = 6
 clearScreen()
 print(">>> Welcome to Hangman!")
 joinArray(array)
-print(randomWord)
+
 running(totalGuess)
