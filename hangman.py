@@ -4,21 +4,19 @@ from randomword import randomWord, array
 
 
 def win():
-    clearScreen()
-    print("You Win")
-    restart()
+	clearScreen()
+
+	print("You Win")
+	restart()
 
 
 def lose():
-    clearScreen()
-    print("You lose")
-    drawHangMan(totalGuess)
-    print(f"The answer is: {randomWord}")
-    restart()
+	clearScreen()
 
-
-def joinArray(array):
-    print(" ".join(array))
+	print("You lose")
+	drawHangMan(totalGuess)
+	print(f"The answer is: {randomWord}")
+	restart()
 
 
 def incorrectGuess(totalGuess):
@@ -29,7 +27,7 @@ def incorrectGuess(totalGuess):
 		print(f"You have {totalGuess} guesses left")
 
 		drawHangMan(totalGuess)
-		joinArray(array)
+		print(" ".join(array))
 	else:
 		lose()
 
@@ -54,7 +52,7 @@ def running(totalGuess):
             correct = True
             array[value] = char
 
-    joinArray(array)
+    print(" ".join(array))
 
     if correct != True:
         totalGuess -= 1
@@ -70,6 +68,6 @@ totalGuess = 6
 
 clearScreen()
 print(">>> Welcome to Hangman!")
-joinArray(array)
+print(" ".join(array))
 
 running(totalGuess)
