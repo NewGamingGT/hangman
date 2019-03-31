@@ -33,6 +33,7 @@ def incorrectGuess(totalGuess):
 
 	running(totalGuess)
 
+
 def checkInput():
     guessChar = input("Guess your letter: ")
 
