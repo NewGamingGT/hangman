@@ -17,34 +17,23 @@ def lose():
     restart()
 
 
-def checkWin(totalGuess):
-    if "".join(array) == randomWord:
-        win()
-
-
-def checkLose(totalGuess):
-    if totalGuess == 0:
-        lose()
-
-
 def joinArray(array):
     print(" ".join(array))
 
 
-def checkGuess(totalGuess):
-    checkWin(totalGuess)
+def incorrectGuess(totalGuess):
+	clearScreen()
 
-    clearScreen()
-    
-    print("Incorrect!")
-    print(f"You have {totalGuess} guesses left")
+	if totalGuess != 0:
+		print("Incorrect!")
+		print(f"You have {totalGuess} guesses left")
 
-    drawHangMan(totalGuess)
-    joinArray(array)
-    checkLose(totalGuess)
+		drawHangMan(totalGuess)
+		joinArray(array)
+	else:
+		lose()
 
-    running(totalGuess)
-
+	running(totalGuess)
 
 def checkInput():
     guessChar = input("Guess your letter: ")
@@ -57,26 +46,30 @@ def checkInput():
 
 
 def running(totalGuess):
-
-    checkWin(totalGuess)
-
+    correct = False
     guessChar = checkInput()
 
-    for i in randomWord:
-        if i.lower() == guessChar.lower():
-            for x, y in enumerate(randomWord):
-                if(y == i): array[x] = i
+    for value, char in enumerate(randomWord):
+        if char.lower() == guessChar.lower():
+            correct = True
+            array[value] = char
 
-            joinArray(array)
-            running(totalGuess)
+    joinArray(array)
 
-    totalGuess -= 1
-    checkGuess(totalGuess)
+    if correct != True:
+        totalGuess -= 1
+        incorrectGuess(totalGuess)
+    else:
+        if "".join(array) == randomWord:
+        	win()
+
+    running(totalGuess)
+
 
 totalGuess = 6
 
 clearScreen()
 print(">>> Welcome to Hangman!")
 joinArray(array)
-
+print(randomWord)
 running(totalGuess)
