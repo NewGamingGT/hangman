@@ -34,7 +34,7 @@ def incorrectGuess(totalGuess):
 	running(totalGuess)
 
 
-def checkInput():
+def getInput():
     guessChar = input("Guess your letter: ")
 
     if guessChar.isdigit() or len(guessChar) > 1 or guessChar == "":
@@ -46,12 +46,12 @@ def checkInput():
 
 def running(totalGuess):
     correct = False
-    guessChar = checkInput()
+    guessChar = getInput()
 
-    for value, char in enumerate(randomWord):
+    for index, char in enumerate(randomWord):
         if char.lower() == guessChar.lower():
             correct = True
-            array[value] = char
+            array[index] = char
 
     print(" ".join(array))
 
