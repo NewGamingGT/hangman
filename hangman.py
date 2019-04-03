@@ -2,73 +2,78 @@ from drawhangman import drawHangMan
 from gameflow import clearScreen, restart
 from randomword import randomWord, array
 
+guessLeft = 6
+
+def main():
+	clearScreen()
+	print(">>> Welcome to Hangman!")
+	print(" ".join(array))
+
+	while True:
+		correctGuess = False
+		guessCharacter = getInput()
+
+		correctGuess = guessIsCorrect(guessCharacter, correctGuess)
+
+		print(" ".join(array))
+
+		if correctGuess != True:
+			incorrectGuess()
+		else:
+			if "".join(array) == randomWord:
+				win()
+
+	return 0
+
+
+def getInput():
+	while True:
+		guessCharacter = input("Guess your letter: ")
+
+		if guessCharacter.isdigit() or len(guessCharacter) > 1 or guessCharacter == "":
+			print("Please enter one character and do not put numbers")
+		else:
+			return guessCharacter
+
+
+def guessIsCorrect(charGuess, correctGuess):
+    for index, char in enumerate(randomWord):
+        if char.lower() == charGuess.lower():
+            correctGuess = True
+            array[index] = char
+    return correctGuess
+
 
 def win():
 	clearScreen()
 
-	print("You Win")
+	drawHangMan(None)
 	restart()
+
+
+def incorrectGuess():
+	global guessLeft
+
+	clearScreen()
+
+	guessLeft -= 1
+
+	if guessLeft != 0:
+		print("Incorrect!")
+		print(f"You have {guessLeft} guesses left")
+
+		drawHangMan(guessLeft)
+		print(" ".join(array))
+	else:
+		lose()
 
 
 def lose():
 	clearScreen()
 
 	print("You lose")
-	drawHangMan(totalGuess)
+	drawHangMan(guessLeft)
 	print(f"The answer is: {randomWord}")
 	restart()
 
-
-def incorrectGuess(totalGuess):
-	clearScreen()
-
-	if totalGuess != 0:
-		print("Incorrect!")
-		print(f"You have {totalGuess} guesses left")
-
-		drawHangMan(totalGuess)
-		print(" ".join(array))
-	else:
-		lose()
-
-	running(totalGuess)
-
-
-def getInput():
-    guessChar = input("Guess your letter: ")
-
-    if guessChar.isdigit() or len(guessChar) > 1 or guessChar == "":
-        print("Please enter one character and do not put numbers")
-        running(totalGuess)
-    else:
-        return guessChar
-
-
-def running(totalGuess):
-    correct = False
-    guessChar = getInput()
-
-    for index, char in enumerate(randomWord):
-        if char.lower() == guessChar.lower():
-            correct = True
-            array[index] = char
-
-    print(" ".join(array))
-
-    if correct != True:
-        totalGuess -= 1
-        incorrectGuess(totalGuess)
-    else:
-        if "".join(array) == randomWord:
-        	win()
-
-    running(totalGuess)
-
-
-totalGuess = 6
-
-clearScreen()
-print(">>> Welcome to Hangman!")
-print(" ".join(array))
-
-running(totalGuess)
+main()
