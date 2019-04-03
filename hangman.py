@@ -76,4 +76,5 @@ def lose():
 	print(f"The answer is: {randomWord}")
 	restart()
 
-main()
+if __name__ == '__main__':
+    main()
