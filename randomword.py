@@ -4,7 +4,7 @@ with open("sowpods.txt", 'r') as f:
     lines = f.readlines()
 
 randomWord = random.choice(lines).strip()
-#TODO Make up a better name for the variable
+#TODO Make up a better name for this variable
 array = []
 
 for _ in range(len(randomWord)):
