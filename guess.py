@@ -8,8 +8,10 @@ class Guess:
 		clearScreen()
 		self.__guessLeft = guessLeft
 
+
 	def getGuessLeft(self):
 		return self.__guessLeft
+
 
 	def incorrectGuess(self):
 
@@ -24,9 +26,11 @@ class Guess:
 			drawHangMan(self.__guessLeft)
 			print(" ".join(array))
 		else:
+			# lose the game is the guess left is equal to zero
 			Game.lose(self)
 
 class Game(Guess):
+
 
 	def lose(self):
 		clearScreen()
@@ -35,6 +39,7 @@ class Game(Guess):
 		drawHangMan(Guess.getGuessLeft)
 		print(f"The answer is: {randomWord}")
 		restart()
+
 
 	def win(self):
 		clearScreen()
