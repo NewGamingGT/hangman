@@ -1,5 +1,5 @@
 from gamemanager import clearScreen, restart
-from drawhangman import drawHangMan
+from drawASCII import drawHangMan, drawWin
 from randomword import randomWord, array
 
 class Guess:
@@ -32,12 +32,12 @@ class Game(Guess):
 		clearScreen()
 
 		print("You lose")
-		drawHangMan(Guess.getGuessLeft(self))
+		drawHangMan(Guess.getGuessLeft)
 		print(f"The answer is: {randomWord}")
 		restart()
 
 	def win(self):
 		clearScreen()
 
-		drawHangMan(Guess.getGuessLeft(self))
+		drawWin()
 		restart()

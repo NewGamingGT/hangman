@@ -19,7 +19,7 @@ def main():
 		if correctGuess != True:
 			game.incorrectGuess()
 		else:
-			if isAllCorrect():
+			if AllCharacterIsCorrect():
 				game.win()
 
 	return 0
@@ -42,7 +42,7 @@ def guessIsCorrect(charGuess, correctGuess):
             array[index] = char
     return correctGuess
 
-def isAllCorrect():
+def AllCharacterIsCorrect():
 	if "".join(array) == randomWord:
 		return True
 
