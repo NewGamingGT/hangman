@@ -1,4 +1,4 @@
-from gameflow import clearScreen, restart
+from gamemanager import clearScreen, restart
 from drawhangman import drawHangMan
 from randomword import randomWord, array
 
@@ -7,6 +7,9 @@ class Guess:
 	def __init__(self, guessLeft):
 		clearScreen()
 		self.__guessLeft = guessLeft
+
+	def getGuessLeft(self):
+		return self.__guessLeft
 
 	def incorrectGuess(self):
 
@@ -21,18 +24,20 @@ class Guess:
 			drawHangMan(self.__guessLeft)
 			print(" ".join(array))
 		else:
-			self.lose()
+			Game.lose(self)
+
+class Game(Guess):
 
 	def lose(self):
 		clearScreen()
 
 		print("You lose")
-		drawHangMan(self.__guessLeft)
+		drawHangMan(Guess.getGuessLeft(self))
 		print(f"The answer is: {randomWord}")
 		restart()
 
 	def win(self):
 		clearScreen()
 
-		drawHangMan(None)
+		drawHangMan(Guess.getGuessLeft(self))
 		restart()

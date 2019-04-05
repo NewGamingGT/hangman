@@ -1,9 +1,9 @@
 from randomword import randomWord, array
-from guess import Guess
+from guess import Game
 
 
 def main():
-	guessLeft = Guess(6)
+	game = Game(6)
 
 	print(">>> Welcome to Hangman!")
 	print(" ".join(array))
@@ -17,10 +17,10 @@ def main():
 		print(" ".join(array))
 
 		if correctGuess != True:
-			guessLeft.incorrectGuess()
+			game.incorrectGuess()
 		else:
-			if "".join(array) == randomWord:
-				guessLeft.win()
+			if isAllCorrect():
+				game.win()
 
 	return 0
 
@@ -41,6 +41,10 @@ def guessIsCorrect(charGuess, correctGuess):
             correctGuess = True
             array[index] = char
     return correctGuess
+
+def isAllCorrect():
+	if "".join(array) == randomWord:
+		return True
 
 if __name__ == '__main__':
     main()
