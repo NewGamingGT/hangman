@@ -1,11 +1,10 @@
-from drawhangman import drawHangMan
-from gameflow import clearScreen, restart
 from randomword import randomWord, array
+from guess import Guess
 
-guessLeft = 6
 
 def main():
-	clearScreen()
+	guessLeft = Guess(6)
+
 	print(">>> Welcome to Hangman!")
 	print(" ".join(array))
 
@@ -18,10 +17,10 @@ def main():
 		print(" ".join(array))
 
 		if correctGuess != True:
-			incorrectGuess()
+			guessLeft.incorrectGuess()
 		else:
 			if "".join(array) == randomWord:
-				win()
+				guessLeft.win()
 
 	return 0
 
@@ -42,39 +41,6 @@ def guessIsCorrect(charGuess, correctGuess):
             correctGuess = True
             array[index] = char
     return correctGuess
-
-
-def win():
-	clearScreen()
-
-	drawHangMan(None)
-	restart()
-
-
-def incorrectGuess():
-	global guessLeft
-
-	clearScreen()
-
-	guessLeft -= 1
-
-	if guessLeft != 0:
-		print("Incorrect!")
-		print(f"You have {guessLeft} guesses left")
-
-		drawHangMan(guessLeft)
-		print(" ".join(array))
-	else:
-		lose()
-
-
-def lose():
-	clearScreen()
-
-	print("You lose")
-	drawHangMan(guessLeft)
-	print(f"The answer is: {randomWord}")
-	restart()
 
 if __name__ == '__main__':
     main()
