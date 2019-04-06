@@ -42,7 +42,5 @@ class Game(Guess):
 
 
 	def win(self):
-		clearScreen()
-
 		drawWin()
 		restart()
