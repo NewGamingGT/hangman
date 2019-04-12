@@ -13,7 +13,7 @@ def main():
 		correctGuess = False
 		guessCharacter = getInput()
 
-		# returns true if the player guessed one of the character correctly
+		# Returns true if the player guessed one of the character correctly
 		isCorrectGuess = guessIsCorrect(guessCharacter, correctGuess)
 
 		print(" ".join(array))
@@ -21,7 +21,7 @@ def main():
 		if isCorrectGuess != True:
 			game.incorrectGuess()
 		else:
-			# win the game is the function returns true
+			# Win the game is the function returns true
 			if AllCharacterIsCorrect():
 				game.win()
 
